@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+	
+	
+	
+	
+	<!-- Register -->
+	<insert id="register">
+	    INSERT INTO FMEMBER(  USERID 
+	   					       , USERPASS 	)
+	                  VALUES(    #{userId} 
+	                 		   , #{userPass})
+    </insert>
+    
+    
+       <!-- Login -->
+	<select id="login" resultType="com.care.dto.MemberDTO">
+		SELECT USERID, USERPASS 
+		  FROM FMEMBER
+		 WHERE USERID = #{userId}
+		   AND USERPASS = #{userPass}   
+	</select>
+    
+    
+    <select id="regiDupe" resultType="com.care.dto.MemberDTO">
+    	SELECT USERID
+    	FROM FMEMBER
+    	WHERE USERID = #{userId}
+    </select>
+    
+    
+    
+    
+<!-- Update Member Info -->
+	<update id="memberUpdate">
+		UPDATE FMEMBER SET 
+		USERPASS = #{userPass}
+		WHERE USERID = #{userId}
+	</update>
+    
+   <!-- Delete Account -->
+   <delete id="memberDelete">
+   		DELETE FROM FMEMBER
+   		WHERE USERID = #{userId}
+   		AND USERPASS = #{userPass}
+   </delete>
+   
+  
+   
+   
+   
+   
+   
+   
+</mapper>

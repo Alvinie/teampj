@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="priceMapper">
+
+ <!-- Save Price -->
+   <insert id="savePrice">
+	   INSERT INTO PBOARD(    PNO 
+	   					      , USERID 
+	   					      , CAR 
+	   					      , COLOR
+	   					      , OPTION1
+	   					      , OPTION2
+	   					      , OPTION3
+	   					      , OPTION4
+	   					      , OPTION5	)
+	                 VALUES(    PBOARD_SEQ.NEXTVAL 
+	                 		  , #{userId}
+	                 		  , #{car}
+	                 		  , #{color}
+	                 		  , #{option1,jdbcType=VARCHAR}
+	                 		  , #{option2,jdbcType=VARCHAR}
+	                 		  , #{option3,jdbcType=VARCHAR}
+	                 		  , #{option4,jdbcType=VARCHAR}
+	                 		  , #{option5,jdbcType=VARCHAR}	 )
+   </insert>
+
+   
+   
+
+   
+   
+   
+   
+   <select id="plist" resultType="com.care.dto.PriceDTO" >
+		SELECT  PNO, 
+				USERID,
+		        COLOR,  
+		        CAR,
+		        OPTION1,
+		        OPTION2,
+		        OPTION3,
+		        OPTION4,
+		        OPTION5
+		 FROM PBOARD
+		 WHERE USERID = #{userId}
+	</select>
+   
+   
+   
+   <!-- Select One Content from Board -->
+   <select id="viewPrice" parameterType="int" resultType="com.care.dto.PriceDTO">
+		SELECT PNO
+				, USERID
+				, CAR
+				, COLOR
+				, OPTION1
+				, OPTION2
+				, OPTION3
+				, OPTION4
+				, OPTION5
+		FROM PBOARD
+		WHERE PNO = #{pno}
+	</select>
+   
+   
+
+	
+	 <!-- Delete Content from Board -->
+	    
+	<delete id="deletePrice" parameterType="int">
+		DELETE 
+		  FROM PBOARD
+		 WHERE PNO = #{pno}
+	</delete>
+
+</mapper>

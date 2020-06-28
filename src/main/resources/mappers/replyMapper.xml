@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="replyMapper">
+
+<!-- Lookup Reply -->
+	<select id="readReply" resultType="com.care.dto.ReplyDTO">
+    	SELECT
+    		  RNO, CONTENT, WRITER, REGDATE
+    	 FROM RBOARD
+    	WHERE BNO = #{bno}
+	</select>
+
+<!-- Write Reply -->
+<insert id="writeReply">
+INSERT INTO RBOARD(
+	BNO
+	, RNO
+	, CONTENT
+	, WRITER
+)
+VALUES(    #{bno}
+	, RBOARD_SEQ.NEXTVAL
+	, #{content}
+	, #{writer}	)
+</insert>
+
+<!-- Edit Reply -->
+	<update id="updateReply" parameterType="com.care.dto.ReplyDTO">
+		UPDATE RBOARD SET CONTENT = #{content}
+		WHERE RNO = #{rno}
+	</update>
+
+<!-- Delete Reply -->
+	<delete id="deleteReply" parameterType="com.care.dto.ReplyDTO">
+		DELETE FROM RBOARD
+		WHERE RNO = #{rno}
+	</delete>
+	
+<!-- Select Reply -->
+	<select id="selectReply" resultType="com.care.dto.ReplyDTO">
+		SELECT
+				BNO
+			  , RNO
+			  , CONTENT
+			  , WRITER
+			  , REGDATE
+		  FROM RBOARD
+		 WHERE RNO = #{rno}
+	</select>
+
+
+
+</mapper>
